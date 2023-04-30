@@ -18,11 +18,10 @@ const Home = () => {
   const [searchText, setSearchText] = useState("")
   const [searchTimeout, setSearchTimeout] = useState(null)
   const [searchedResults, setSearchedResults] = useState(null)
+  const { addError } = useContext(MessageContext)
 
   const fetchPosts = async () => {
     setLoading(true)
-
-    const { addError } = useContext(MessageContext)
 
     try {
       const response = await fetch("https://wordpic.onrender.com/api/v1/post", {
