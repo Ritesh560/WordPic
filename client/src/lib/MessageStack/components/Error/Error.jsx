@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 import styles from "./Error.module.scss"
 
 //component
-import { Close } from "../../../assets/icons"
+import { Caution, Close } from "../../../assets/icons"
 
 const Error = ({ error, remove }) => {
   const timeoutId = useRef()
@@ -32,7 +32,7 @@ const Error = ({ error, remove }) => {
       </span>
       <div className={styles.errorText}>
         <div>
-          <Caution color={white} />
+          <Caution color={"#ffffff"} />
         </div>
         <div className={styles.text}>{error.text}</div>
       </div>

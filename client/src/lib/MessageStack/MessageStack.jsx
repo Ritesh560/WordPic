@@ -10,10 +10,6 @@ import styles from "./MessageStack.module.scss"
 const MessageStack = () => {
   const { errorsArray, removeError, successArray, removeSuccess } = useContext(MessageContext)
 
-  useEffect(() => {
-    console.log(typeof successArray)
-  }, [successArray])
-
   return (
     <div className={styles.errorStack}>
       {errorsArray?.map((error) => (

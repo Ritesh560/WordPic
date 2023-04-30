@@ -27,8 +27,6 @@ const CreatePost = () => {
   }
 
   const generateImage = async () => {
-    // addSuccess("generating image")
-
     if (generatingImg) {
       return
     }
@@ -49,13 +47,12 @@ const CreatePost = () => {
         const data = await response.json()
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` })
       } catch (err) {
-        alert(err)
-        // addError(err)
+        addError(err)
       } finally {
         setGeneratingImg(false)
       }
     } else {
-      alert("Please provide proper prompt")
+      addError("Please provide proper prompt")
     }
   }
 
@@ -74,15 +71,15 @@ const CreatePost = () => {
         })
 
         await response.json()
-        alert("Success")
+        addSuccess("Success")
         navigate("/")
       } catch (err) {
-        alert(err)
+        addError(err)
       } finally {
         setLoading(false)
       }
     } else {
-      alert("Please generate an image with proper details")
+      addError("Please generate an image with proper details")
     }
   }
 

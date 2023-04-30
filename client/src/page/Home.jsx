@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 
 import { Card, FormField, Loader } from "../components"
+import { MessageContext } from "../lib/contexts/MessageContext"
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -21,6 +22,8 @@ const Home = () => {
   const fetchPosts = async () => {
     setLoading(true)
 
+    const { addError } = useContext(MessageContext)
+
     try {
       const response = await fetch("https://wordpic.onrender.com/api/v1/post", {
         method: "GET",
@@ -34,7 +37,7 @@ const Home = () => {
         setAllPosts(result.data.reverse())
       }
     } catch (err) {
-      alert(err)
+      addError(err)
     } finally {
       setLoading(false)
     }

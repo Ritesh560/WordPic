@@ -35,7 +35,7 @@ const Success = ({ success, remove }) => {
         <Close />
       </span>
       <div className={styles.errorText}>
-        <div>{success.isDeleted ? <RoundedTick color={white} /> : <PartyPopper color={white} />}</div>
+        <div>{success.isDeleted ? <RoundedTick color={"#ffffff"} /> : <PartyPopper color={"#ffffff"} />}</div>
         <div className={styles.text}>{success.text}</div>
       </div>
     </div>
