@@ -3,7 +3,7 @@ import { BrowserRouter, Link, Route, Routes } from "react-router-dom"
 
 import { Home, CreatePost } from "./page"
 import { wordpic } from "./assets"
-import "./app.scss"
+import "./App.scss"
 
 const App = () => (
   <BrowserRouter>
