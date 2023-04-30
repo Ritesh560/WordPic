@@ -1,0 +1,117 @@
+// New Color Palette
+$pastelBlue: #b0bec5;
+$grayX11: #bdbdbd;
+$silverPink: #bcaaa4;
+$vividTangerine: #ffab91;
+$topaz: #ffcc80;
+$jasmine: hsl(45, 100%, 75%);
+$corn: #ffee58;
+$menthol: #c5e1a5;
+$lightMossGreen: #a5d6a7;
+$verdigris: #4db6ac;
+$mediumSkyBlue: #80deea;
+$skyBlue: #80deea;
+$blueJeans: #64b5f6;
+$wildBlue: #9fa8da;
+$lightPurple: #b39ddb;
+$lightGrayMagenta: #ce93d8;
+$fireOpal: #ef5350;
+$cerisPink: #ec407a;
+$lighCrimson: #f06292;
+$candyPink: #e57373;
+$richLilac: #ba68c8;
+$darkPastelPurple: #9575cd;
+$seaSerpent: #4dd0e1;
+$pearlAqua: #80cbc4;
+$darkSeaGreen: #81c784;
+$yellowGreen: #aed581;
+$shandy: #fff176;
+$mustard: #ffd54f;
+$pastelOrange: #ffb74d;
+$atomicTangerine: #ff8a65;
+$cineReous: #a1887f;
+$brightGray: #ebedf4;
+$cadetGray: #90a4ae;
+
+$black: #394759;
+$lightBlue: #567191;
+$veryLightBlue: #8193a8;
+$mainPurple: #5b6be1;
+$secondaryPink: #fb7a96;
+$ringoverColor: #00b3a8;
+$green: #00ddd0;
+$turq: #41bcc3;
+$darkTurq: #08464b;
+$mountainBlueFade: #41bcc32e;
+$lightMountainBlue: #00ddd0;
+$yellow: #ffb12a;
+$red: #f77272;
+$darkRed: #ef525e;
+$blue: #5ea5e9;
+$darkBlue: #2d5380;
+$darkGrey: #474747;
+$gray: #6f6f79;
+$white: #ffffff;
+
+$hover: #f0f8fe;
+$input: #f5f6f7;
+$grey: #e4e6ea;
+$border: #e7ebff;
+$innerBorder: #dadce0;
+$link: #037dfc;
+$background: #eff7fd;
+
+// New Gradient Palette
+$primaryGradient: linear-gradient(
+  106.52deg,
+  #a282e8 -11.57%,
+  #7e8ee7 50.39%,
+  #4499e9 116.35%
+);
+$primaryBoxShadow: 1px 8px 32px rgba(143, 136, 231, 0.32);
+$primaryGradientHover: linear-gradient(
+  25.89deg,
+  rgba(162, 130, 232, 0.72) -35.32%,
+  rgba(126, 142, 231, 0.72) 39.27%,
+  rgba(68, 153, 233, 0.72) 118.66%
+);
+$secondaryGradient: linear-gradient(
+  115.94deg,
+  #f75a92 -12.55%,
+  #ff9a9a 112.61%
+);
+$buttonGradient: linear-gradient(
+  106.52deg,
+  rgba(162, 130, 232, 0.1) -11.57%,
+  rgba(126, 142, 231, 0.1) 50.39%,
+  rgba(68, 153, 233, 0.1) 116.35%
+);
+$buttonBorder: rgba(91, 107, 225, 0.04);
+$lightGray: rgba(129, 147, 168, 0.48);
+$mediumGray: rgba(86, 113, 145, 0.08);
+$slightBlueBackground: rgba(91, 107, 225, 0.08);
+$background: linear-gradient(180deg, #cbeff3 0%, #b6cde8 100%);
+$bodyBackground: #eff7fd;
+$ringoverGradient: linear-gradient(315deg, #40e0cf 0%, #36cdcf 100%);
+$orangeGradient: linear-gradient(135deg, #ffcf4f 0%, #ff9b4a 100%);
+$redGradient: linear-gradient(315deg, #ff8888 0%, #f05f5f 100%);
+$blueGradient: linear-gradient(315deg, #72bbf1 0%, #4b90e2 100%);
+$redGradient: linear-gradient(115.94deg, #f75a92 -12.55%, #ff9a9a 112.61%);
+$selectedBackground: linear-gradient(
+  106.52deg,
+  rgba(162, 130, 232, 0.05) -11.57%,
+  rgba(126, 142, 231, 0.05) 50.39%,
+  rgba(68, 153, 233, 0.05) 116.35%
+);
+$darkBackground: linear-gradient(
+  106.52deg,
+  rgba(162, 130, 232, 0.08) -11.57%,
+  rgba(126, 142, 231, 0.08) 50.39%,
+  rgba(68, 153, 233, 0.08) 116.35%
+);
+$lightBackground: linear-gradient(
+  106.52deg,
+  rgba(162, 130, 232, 0.04) -11.57%,
+  rgba(126, 142, 231, 0.04) 50.39%,
+  rgba(68, 153, 233, 0.04) 116.35%
+);
