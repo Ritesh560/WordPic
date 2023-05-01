@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react"
 import Header from "../Header"
 import { useProfile, useUser } from "../../lib/data-access/src"
-import { BACKEND_URL } from "../../../config"
 import { Card, Loader } from "../../components"
+
+const RenderCards = ({ data, title, user }) => {
+  if (data?.length > 0) {
+    return data.map((post) => <Card key={post._id} {...post} user={user} />)
+  }
+
+  return <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
+}
 
 function Profile({ user, setUser }) {
   const { fetchUser, fetchingUser } = useUser()
@@ -44,14 +51,6 @@ function Profile({ user, setUser }) {
     }
   }
 
-  const RenderCards = ({ data, title }) => {
-    if (data?.length > 0) {
-      return data.map((post) => <Card key={post._id} {...post} />)
-    }
-
-    return <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
-  }
-
   useEffect(() => {
     if (Object.keys(user).length === 0) handleFetchUser()
 
@@ -79,7 +78,7 @@ function Profile({ user, setUser }) {
               </div>
             ) : (
               <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
-                <RenderCards data={allPosts} title="No Posts Yet" />
+                <RenderCards data={allPosts} title="No Posts Yet" user={user} />
               </div>
             )}
           </div>

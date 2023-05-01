@@ -72,10 +72,10 @@ const like = async (req, res) => {
   const post_id = req.body.post_id
 
   try {
-    const [user, post] = await Promise.all([User.findById(user_id), Post.findById(post_id).lean()])
+    const [user, post] = await Promise.all([User.findById(user_id), Post.findById(post_id)])
 
     // Check if the post is already bookmarked by the user
-    if (user.bookmarks.some((b) => b._id.equals(post._id))) {
+    if (post.likes.some((b) => b._id.equals(user._id))) {
       return res.status(400).send({ error: "Post is already liked by user" })
     }
 
