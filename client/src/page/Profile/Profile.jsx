@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Header from "../Header"
 import { useProfile, useUser } from "../../lib/data-access/src"
-import { BACKEND_URL } from "../../../config"
 import { Card, Loader } from "../../components"
 
 function Profile({ user, setUser }) {

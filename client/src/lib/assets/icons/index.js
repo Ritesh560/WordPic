@@ -4,5 +4,6 @@ import { ReactComponent as PartyPopper } from "./party_popper.svg"
 import { ReactComponent as Caution } from "./caution.svg"
 import { ReactComponent as Eye } from "./eye.svg"
 import { ReactComponent as FilledEye } from "./filled_eye.svg"
+import { ReactComponent as LogOut } from "./logout.svg"
 
-export { Close, RoundedTick, PartyPopper, Caution, Eye, FilledEye }
+export { Close, RoundedTick, PartyPopper, Caution, Eye, FilledEye, LogOut }
