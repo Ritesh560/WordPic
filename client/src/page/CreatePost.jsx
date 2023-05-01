@@ -6,6 +6,7 @@ import { getRandomPrompt } from "../utils"
 import { FormField, Loader } from "../components"
 import { MessageContext } from "../lib/contexts/MessageContext"
 import Header from "./Header"
+import { BACKEND_URL } from "../../config"
 
 const CreatePost = () => {
   const navigate = useNavigate()
@@ -35,7 +36,7 @@ const CreatePost = () => {
     if (form.prompt && form.name) {
       try {
         setGeneratingImg(true)
-        const response = await fetch("https://wordpic.onrender.com/api/v1/dalle", {
+        const response = await fetch(`${BACKEND_URL}/api/v1/dalle`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -63,7 +64,7 @@ const CreatePost = () => {
     if (form.prompt && form.photo && form.name) {
       setLoading(true)
       try {
-        const response = await fetch("https://wordpic.onrender.com/api/v1/post", {
+        const response = await fetch(`${BACKEND_URL}/api/v1/post`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

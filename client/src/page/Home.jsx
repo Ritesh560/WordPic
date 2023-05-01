@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react"
 import { Card, FormField, Loader } from "../components"
 import { MessageContext } from "../lib/contexts/MessageContext"
 import Header from "./Header"
+import { BACKEND_URL } from "../../config"
 
 const RenderCards = ({ data, title }) => {
   if (data?.length > 0) {
@@ -25,7 +26,7 @@ const Home = () => {
     setLoading(true)
 
     try {
-      const response = await fetch("https://wordpic.onrender.com/api/v1/post", {
+      const response = await fetch(`${BACKEND_URL}/api/v1/post`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +54,7 @@ const Home = () => {
 
     setSearchTimeout(
       setTimeout(() => {
-        const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()))
+        const searchResult = allPosts.filter((item) => (item.name || item.user_posted).toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()))
         setSearchedResults(searchResult)
       }, 500)
     )
