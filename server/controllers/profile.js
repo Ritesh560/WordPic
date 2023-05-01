@@ -7,7 +7,6 @@ const getProfile = (req, res) => {
   User.findById(user_id)
     .select("-password")
     .then((user) => {
-      console.log(user_id)
       Post.find({ posted_by: user_id })
         .select("-posted_by")
         .exec((err, posts) => {
@@ -26,20 +25,21 @@ const follow = async (req, res) => {
   const follower_id = req.user.id
   const following_id = req.body.user_id
 
-  console.log(follower_id, following_id)
-
   try {
-    // const [follower, following] = await Promise.all([User.findById(follower_id), User.findById(following_id)])
+    const [follower, following] = await Promise.all([User.findById(follower_id), User.findById(following_id)])
 
-    // following.followers.push({
-    //   _id: follower._id,
-    //   avatar: follower.avatar,
-    //   name: follower.name,
-    // })
+    // Check if the follower is already following the user
+    if (following.followers.some((f) => f._id.equals(follower._id))) {
+      return res.status(400).send({ error: "User is already a follower" })
+    }
 
-    // await following.save()
+    following.followers.push(follower)
+    follower.following.push(following)
 
-    res.status(200).json({ following: "following" })
+    await following.save()
+    await follower.save()
+
+    res.status(200).json(following)
   } catch (err) {
     return res.status(400).send({ error: err })
   }
@@ -47,10 +47,15 @@ const follow = async (req, res) => {
 
 const bookmark = async (req, res) => {
   const user_id = req.user.id
-  const post_id = req.post_id
+  const post_id = req.body.post_id
 
   try {
-    const [user, post] = await Promise.all([User.findById(user_id), Post.findById(post_id)])
+    const [user, post] = await Promise.all([User.findById(user_id), Post.findById(post_id).lean()])
+
+    // Check if the post is already bookmarked by the user
+    if (user.bookmarks.some((b) => b._id.equals(post._id))) {
+      return res.status(400).send({ error: "Post is already bookmarked by user" })
+    }
 
     user.bookmarks.push(post)
 
@@ -63,15 +68,56 @@ const bookmark = async (req, res) => {
 }
 
 const getFollowers = (req, res) => {
-  res.status(200).send("getFollowers")
+  const user_id = req.user.id
+
+  User.findById(user_id)
+    .select("-password")
+    .then((user) => {
+      // res.status(200).json(user.followers)
+      User.find({ _id: { $in: user.followers } })
+        .then((user) => {
+          res.status(200).json(user)
+        })
+        .catch((err) => {
+          res.status(400).send({ error: err })
+        })
+    })
+    .catch((err) => res.status(400).send({ error: err }))
 }
 
 const getFollowings = (req, res) => {
-  res.status(200).send("getFollowings")
+  const user_id = req.user.id
+
+  User.findById(user_id)
+    .select("-password")
+    .then((user) => {
+      // res.status(200).json(user.followers)
+      User.find({ _id: { $in: user.following } })
+        .then((user) => {
+          res.status(200).json(user)
+        })
+        .catch((err) => {
+          res.status(400).send({ error: err })
+        })
+    })
+    .catch((err) => res.status(400).send({ error: err }))
 }
 
 const getBookmarks = (req, res) => {
-  res.status(200).send("getBookmarks")
+  const user_id = req.user.id
+
+  User.findById(user_id)
+    .select("-password")
+    .then((user) => {
+      Post.find({ _id: { $in: user.bookmarks } })
+        .then((posts) => {
+          res.status(200).json(posts)
+        })
+        .catch((err) => {
+          res.status(400).send({ error: err })
+        })
+    })
+    .catch((err) => res.status(400).send({ error: err }))
 }
 
 export default {
