@@ -89,7 +89,7 @@ const Home = ({ user, setUser }) => {
     <div>
       {checkAccessToken() ? (
         <div>
-          <Header />
+          <Header user={user} />
           <main className="sm:p-8 px-4 py-8 w-full min-h-[calc(100vh-73px)] wordPic_container">
             <section className="max-w-7xl mx-auto">
               <div>
