@@ -8,6 +8,7 @@ import MessageProvider from "./lib/contexts/MessageContext"
 import MessageStack from "./lib/MessageStack/MessageStack"
 import Login from "./page/Login/Login"
 import Signup from "./page/Signup/Signup"
+import Profile from "./page/Profile/Profile"
 
 const App = () => {
   const [user, setUser] = useState({})
@@ -30,6 +31,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/create-post" element={<CreatePost user={user} setUser={setUser} />} />
+            <Route path="/profile" element={<Profile user={user} setUser={setUser} />} />
           </Routes>
         </MessageProvider>
       </BrowserRouter>

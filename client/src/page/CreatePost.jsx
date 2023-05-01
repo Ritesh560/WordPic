@@ -136,7 +136,7 @@ const CreatePost = ({ user, setUser }) => {
     <div>
       {checkAccessToken() ? (
         <div>
-          <Header />
+          <Header user={user} />
           <main className="sm:p-8 px-4 py-8 w-full min-h-[calc(100vh-73px)] wordPic_container">
             <section className="w-4/5 mx-auto">
               <div className="flex flex-wrap gap-10 justify-between items-center">
