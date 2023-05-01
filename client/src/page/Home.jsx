@@ -7,9 +7,9 @@ import { BACKEND_URL } from "../../config"
 import { Link, Navigate } from "react-router-dom"
 import { useUser } from "../lib/data-access/src"
 
-const RenderCards = ({ data, title }) => {
+const RenderCards = ({ data, title, user }) => {
   if (data?.length > 0) {
-    return data.map((post) => <Card key={post._id} {...post} />)
+    return data.map((post) => <Card key={post._id} {...post} user={user} />)
   }
 
   return <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
@@ -118,7 +118,7 @@ const Home = ({ user, setUser }) => {
                         Showing Resuls for <span className="text-[#222328]">{searchText}</span>:
                       </h2>
                     )}
-                    <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">{searchText ? <RenderCards data={searchedResults} title="No Search Results Found" /> : <RenderCards data={allPosts} title="No Posts Yet" />}</div>
+                    <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">{searchText ? <RenderCards data={searchedResults} title="No Search Results Found" user={user} /> : <RenderCards data={allPosts} title="No Posts Yet" user={user} />}</div>
                   </>
                 )}
               </div>
