@@ -5,6 +5,9 @@ import cors from "cors"
 import connectDB from "./mongodb/connect.js"
 import postRoutes from "./routes/postRoutes.js"
 import dalleRoutes from "./routes/dalleRoutes.js"
+import auth from "./routes/auth.js"
+import user from "./routes/user.js"
+import profile from "./routes/profile.js"
 
 dotenv.config()
 
@@ -14,6 +17,9 @@ app.use(express.json({ limit: "50mb" }))
 
 app.use("/api/v1/post", postRoutes)
 app.use("/api/v1/dalle", dalleRoutes)
+app.use("/api/v1/auth", auth)
+app.use("/api/v1/user", user)
+app.use("/api/v1/profile", profile)
 
 app.get("/", async (req, res) => {
   res.status(200).json({
