@@ -1,29 +1,43 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styles from "./Signup.module.scss"
 
-// import { useLogin } from "@ro-email-ticketing/data-access"
-// import { Input, ThemedButton, Label } from "@ro-email-ticketing/widgets"
-// import { InputThemes, ThemedButtonThemes } from "@ro-email-ticketing/themes"
 import { wordpic } from "../../assets"
 import { Eye, FilledEye } from "../../lib/assets/icons"
 import { Link } from "react-router-dom"
+import { MessageContext } from "../../lib/contexts/MessageContext"
+import { useSignup } from "../../lib/data-access/src"
 
-const Login = () => {
-  // const { login, loading, error } = useLogin()
+const Signup = () => {
+  const { signup, signing } = useSignup()
   const [input, setInput] = useState({ name: "", email: "", password: "" })
   const [showPassword, setShowPassword] = useState(false)
 
-  // const setUser = useSetRecoilState(userInfo)
+  const { addError } = useContext(MessageContext)
 
-  // const saveUser = (usr) => {
-  //   setUser(usr)
-  //   window.location.href = "/"
-  // }
+  const saveUser = (user) => {
+    localStorage.setItem("accessToken", user?.token)
 
-  // const onSubmit = async (e) => {
-  //   e.preventDefault()
-  //   await login(input, (usr) => saveUser(usr))
-  // }
+    window.location.href = "/"
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    if (input.name === "" || input.email === "" || input.password === "") {
+      addError("All fields are required")
+      return
+    }
+
+    signup(input, {
+      onError: (err) => {
+        console.log(err)
+        addError(err.response.data.errors[0].msg)
+      },
+      onSuccess: (user) => {
+        saveUser(user)
+      },
+    })
+  }
 
   return (
     <div onKeyDown={(e) => e.key === "Enter" && onSubmit(e)} className={styles.loginContainer}>
@@ -56,10 +70,10 @@ const Login = () => {
         </div>
         <button
           onClick={(e) => {
-            onSubmit(e)
+            !signing && onSubmit(e)
           }}
         >
-          Sign up
+          {signing ? "loading..." : "Sign up"}
         </button>
         <Link to="/login">
           <button className={styles.login}>Login</button>
@@ -69,4 +83,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Signup

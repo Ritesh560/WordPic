@@ -67,6 +67,27 @@ const bookmark = async (req, res) => {
   }
 }
 
+const like = async (req, res) => {
+  const user_id = req.user.id
+  const post_id = req.body.post_id
+
+  try {
+    const [user, post] = await Promise.all([User.findById(user_id), Post.findById(post_id).lean()])
+
+    // Check if the post is already bookmarked by the user
+    if (user.bookmarks.some((b) => b._id.equals(post._id))) {
+      return res.status(400).send({ error: "Post is already liked by user" })
+    }
+
+    post.likes.push(user)
+    await post.save()
+
+    res.status(200).json(post)
+  } catch (err) {
+    return res.status(400).send({ error: err })
+  }
+}
+
 const getFollowers = (req, res) => {
   const user_id = req.user.id
 
@@ -120,6 +141,22 @@ const getBookmarks = (req, res) => {
     .catch((err) => res.status(400).send({ error: err }))
 }
 
+const getLikes = (req, res) => {
+  const post_id = req.body.post_id
+
+  Post.findById(post_id)
+    .then((post) => {
+      User.find({ _id: { $in: post.likes } })
+        .then((users) => {
+          res.status(200).json(users)
+        })
+        .catch((err) => {
+          res.status(400).send({ error: err })
+        })
+    })
+    .catch((err) => res.status(400).send({ error: err }))
+}
+
 export default {
   getProfile,
   follow,
@@ -127,4 +164,6 @@ export default {
   getFollowings,
   bookmark,
   getBookmarks,
+  like,
+  getLikes,
 }

@@ -14,7 +14,7 @@ const Card = ({ _id, name, user_posted, prompt, photo }) => {
 
         <div className="mt-5 flex justify-between items-center gap-2">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full object-cover bg-green-700 flex justify-center items-center text-white text-xs font-bold">{user_name[0]}</div>
+            <div className="w-7 h-7 rounded-full object-cover bg-green-700 flex justify-center items-center text-white text-xs font-bold">{user_name?.[0]}</div>
             <p className="text-black text-sm">{user_name}</p>
           </div>
           <button type="button" onClick={() => downloadImage(_id, photo)} className="outline-none bg-[#10131f] border-none rounded-xl">
