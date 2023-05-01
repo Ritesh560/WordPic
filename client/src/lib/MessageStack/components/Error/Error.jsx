@@ -4,7 +4,6 @@ import styles from "./Error.module.scss"
 
 //component
 import { Caution, Close } from "../../../assets/icons"
-import { BACKEND_URL } from "../../../../../config"
 
 const Error = ({ error, remove }) => {
   const timeoutId = useRef()
@@ -14,8 +13,6 @@ const Error = ({ error, remove }) => {
       remove()
     }, 10000)
   })
-
-  console.log(error, BACKEND_URL)
 
   const handleClose = (e) => {
     e.preventDefault()

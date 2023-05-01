@@ -1,29 +1,41 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import styles from "./Login.module.scss"
-
-// import { useLogin } from "@ro-email-ticketing/data-access"
-// import { Input, ThemedButton, Label } from "@ro-email-ticketing/widgets"
-// import { InputThemes, ThemedButtonThemes } from "@ro-email-ticketing/themes"
 import { wordpic } from "../../assets"
 import { Eye, FilledEye } from "../../lib/assets/icons"
 import { Link } from "react-router-dom"
+import { useLogin } from "../../lib/data-access/src"
+import { MessageContext } from "../../lib/contexts/MessageContext"
 
 const Login = () => {
-  // const { login, loading, error } = useLogin()
+  const { login, logging } = useLogin()
   const [input, setInput] = useState({ email: "", password: "" })
   const [showPassword, setShowPassword] = useState(false)
 
-  // const setUser = useSetRecoilState(userInfo)
+  const { addError } = useContext(MessageContext)
 
-  // const saveUser = (usr) => {
-  //   setUser(usr)
-  //   window.location.href = "/"
-  // }
+  const saveUser = (user) => {
+    localStorage.setItem("accessToken", user?.token)
 
-  // const onSubmit = async (e) => {
-  //   e.preventDefault()
-  //   await login(input, (usr) => saveUser(usr))
-  // }
+    window.location.href = "/"
+  }
+
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if (input.email === "" || input.password === "") {
+      addError("All fields are required")
+      return
+    }
+
+    login(input, {
+      onError: (err) => {
+        console.log(err)
+        addError("Invalid Credentials")
+      },
+      onSuccess: (user) => {
+        saveUser(user)
+      },
+    })
+  }
 
   return (
     <div onKeyDown={(e) => e.key === "Enter" && onSubmit(e)} className={styles.loginContainer}>
@@ -50,10 +62,10 @@ const Login = () => {
         </div>
         <button
           onClick={(e) => {
-            onSubmit(e)
+            !logging && onSubmit(e)
           }}
         >
-          Sign in
+          {logging ? "loading..." : "Sign in"}
         </button>
         <Link to="/signup">
           <button className={styles.signup}>Sign up</button>

@@ -54,7 +54,7 @@ router.post("/", [check("name", "Name is required").not().isEmpty(), check("emai
       },
     }
 
-    jwt.sign(payload, process.env.jwtSecret, { expiresIn: 360000 }, (err, token) => {
+    jwt.sign(payload, process.env.jwtSecret, (err, token) => {
       if (err) {
         throw err
       } else {

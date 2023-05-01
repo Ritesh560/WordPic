@@ -25,12 +25,12 @@ router.route("/").get(async (req, res) => {
 
 router.route("/").post(async (req, res) => {
   try {
-    const { name, prompt, photo, user_id } = req.body
+    const { user_posted, prompt, photo, posted_by } = req.body
     const photoUrl = await cloudinary.uploader.upload(photo)
 
     const newPost = await Post.create({
-      posted_by: user_id,
-      user_posted: name,
+      posted_by,
+      user_posted,
       prompt,
       photo: photoUrl.url,
     })
