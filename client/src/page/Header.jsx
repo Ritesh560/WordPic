@@ -1,12 +1,13 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { wordpic } from "../assets"
 import { LogOut } from "../lib/assets/icons"
 
 function Header({ user }) {
+  const Navigate = useNavigate()
   const handleLogout = () => {
     localStorage.removeItem("accessToken")
-    window.location.href = "/login"
+    Navigate("/login")
   }
   return (
     <header className="w-full flex justify-between items-center bg-[#b5d6e5] sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4]">
